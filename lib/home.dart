@@ -1,13 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:provide/theme/colors.dart';
+import 'package:provide/todolist.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   HomePage({super.key});
-  List todo = [
-    ['Buy Coffee'],
-    ['Hard Study'],
-    ['Go to bed'],
+  
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  List gettodolist = [
+    ['Buy Coffee', false],
+    ['Hard Study', false],
+    ['Go to bed', false],
+    ['Buy Tea', false],
+    ['Smart Work', false],
+    ['Go to the gym', false],
+    ['Read Book', false],
+    ['Clean the house', false],
+    ['Do exercise', false],
   ];
+  void checkboxchanged(int index){
+    setState(() {
+      
+    gettodolist[index][1] = !gettodolist[index][1];
+    });
+  }
+
+
+  // final bool task;
+
+  // final Function(bool?)? onChanged;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,8 +42,12 @@ class HomePage extends StatelessWidget {
         centerTitle: true,
         backgroundColor: Colors.pinkAccent,
         actions: [
-          IconButton(onPressed: (){}, icon: Icon(Icons.notifications,color: Colors.white,))
-
+          IconButton(
+              onPressed: () {},
+              icon: Icon(
+                Icons.notifications,
+                color: Colors.white,
+              ))
         ],
       ),
       drawer: Drawer(
@@ -30,53 +59,34 @@ class HomePage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Container(
-                child: Text("Main Page",style: drawertext),
-              
-                ),
-            ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                child: Text("Settings",style: drawertext),
-                
-                ),
+                child: Text("Main Page", style: drawertext),
               ),
-              
-              
-
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                child: Text("Settings", style: drawertext),
+              ),
+            ),
           ],
         ),
       ),
       body: ListView.builder(
-        itemCount: todo.length,
-        itemBuilder: (BuildContext context, index){
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              // color: const Color.fromARGB(255, 64, 153, 212),
-              width: 140,
-              height: 100,
-              decoration: BoxDecoration(
-                color: coolblue,
-                borderRadius: BorderRadius.circular(25)
-
-              ),
-
-
+          itemCount: gettodolist.length,
+          itemBuilder: (BuildContext context, index) {
+            return Todolist(
+              taskname: gettodolist[index][0],
+              taskCompleted: gettodolist[index][1],
+              onChanged: (value){
+                checkboxchanged(index);
+              }
+            );
+          }),
+          floatingActionButton: FloatingActionButton(onPressed: () {
             
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(todo[index][0],style: drawertext,),
-                    IconButton(onPressed: (){}, icon: Icon(Icons.business)),
-                  ],
-                ),
-              )
-              ),
-          );
-      }),
+          },
+            child: Icon(Icons.add)
+          ),
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:provide/todolist.dart';
 final hintTextColor = Colors.black87;
 final bottomButtonColor = Colors.white;
 final buttonColor = Colors.lightGreenAccent;
@@ -33,6 +34,8 @@ TextStyle drawertext = TextStyle(
   fontWeight: FontWeight.bold,
   wordSpacing: 2,
   fontSize: 25,
+  // taskCompleted? TextDecoration.lineThrough : TextDecoration.none,
+  decoration: TextDecoration.lineThrough
 
 
 );
