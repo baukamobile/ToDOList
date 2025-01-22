@@ -13,20 +13,22 @@ class _HomePageState extends State<HomePage> {
   List gettodolist = [
     ['Buy Coffee', false],
     ['Hard Study', false],
-    ['Go to bed', false],
-    ['Buy Tea', false],
-    ['Smart Work', false],
-    ['Go to the gym', false],
-    ['Read Book', false],
     ['Clean the house', false],
     ['Do exercise', false],
   ];
+  final _controller = TextEditingController();
   void checkboxchanged(int index){
     setState(() {
       
     gettodolist[index][1] = !gettodolist[index][1];
     });
   }
+void saveNewtask(){
+  setState(() {
+    
+  gettodolist.add([_controller.text,false]);
+  _controller.clear();
+  });}
 
 
   // final bool task;
@@ -82,11 +84,53 @@ class _HomePageState extends State<HomePage> {
               }
             );
           }),
-          floatingActionButton: FloatingActionButton(onPressed: () {
+          floatingActionButton:
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    child: TextField(
+                      controller: _controller,
+                    decoration: InputDecoration(
+                      filled: true,
+                      // fillColor: Colors.white,
+                      // border: Border.all(
+                      //   color: Colors.white
+                      // ),
+                      hintText: 'Input Someting',
+                      hintStyle: TextStyle(
+                        color: Colors.white
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                      borderSide: BorderSide(
+                        color: Colors.white,
+                      )
+                        
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                        
+                      )
+                    ),
+                                
+                                    ),
+                  )
+                ),
             
-          },
-            child: Icon(Icons.add)
+             FloatingActionButton(onPressed: () {
+              saveNewtask();
+             },
+              child: Icon(Icons.add,color: Colors.blue,)
+                         )
+              ]
+            ),
           ),
     );
+
   }
 }
