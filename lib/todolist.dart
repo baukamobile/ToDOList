@@ -14,7 +14,6 @@ class Todolist extends StatelessWidget {
     return Padding(
               padding: const EdgeInsets.all(8.0),
               child: Container(
-                  // color: const Color.fromARGB(255, 64, 153, 212),
                   width: 140,
                   height: 100,
                   decoration: BoxDecoration(
